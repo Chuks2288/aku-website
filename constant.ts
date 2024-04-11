@@ -1,0 +1,172 @@
+export const navItems = [
+    {
+        label: "Home",
+        path: "/",
+    },
+    {
+        label: "About Us",
+        path: "/about",
+    },
+    {
+        label: "Services",
+        path: "/services",
+    },
+    {
+        label: "Coupon Vendor",
+        path: "/coupon",
+    },
+    {
+        label: "Contact Us",
+        path: "/contact",
+    },
+    {
+        label: "Get started",
+        path: "/getStarted",
+    },
+]
+
+export const socialIcons = [
+    {
+        icon: "basil:twitter-outline",
+        href: "www.twitter.com",
+    },
+    {
+        icon: "ant-design:instagram-outlined",
+        href: "www.instagram.com",
+    },
+    {
+        icon: "circum:facebook",
+        href: "www.facebook.com",
+    },
+]
+
+export const infoItems = [
+    {
+        label: "About Us",
+        path: "/about",
+    },
+    {
+        label: "My Account",
+        path: "/getStarted",
+    },
+    {
+        label: "Contact Us",
+        path: "/contact",
+    },
+]
+
+export const ourServiceItems = [
+    {
+        icon: "arcticons:moneytracker",
+        title: "Referral Program:",
+        text: 'A referral system that allows users to invite others to join "AKU" and earn rewards for successful referrals, encouraging user growth.'
+    },
+    {
+        icon: "fluent:people-community-20-regular",
+        title: "Community and Support:",
+        text: 'A referral system that allows users to invite others to join "AKU" and earn rewards for successful referrals, encouraging user growth.'
+    },
+    {
+        icon: "fluent-mdl2:market",
+        title: "News and Market Updates:",
+        text: 'A referral system that allows users to invite others to join "AKU" and earn rewards for successful referrals, encouraging user growth.'
+    },
+    {
+        icon: "arcticons:moneytracker",
+        title: "Referral Program:",
+        text: 'A referral system that allows users to invite others to join "AKU" and earn rewards for successful referrals, encouraging user growth.'
+    },
+];
+
+export const missionInfo = [
+    {
+        id: "1",
+        image: "/home/mission.svg",
+        title: "Our Mission",
+        text: "At AKU, our mission is to empower individuals to realize their full potential by providing them with opportunities to earn rewards for their online activities. We believe in harnessing the power of the digital world to improve lives and offer a platform where everyone can access a range of engaging and rewarding tasks. We are committed to creating a supportive community that fosters financial growth, skill development, and personal fulfilment for our user.",
+    },
+    {
+        id: "2",
+        image: "/home/vision.svg",
+        title: "Our Vision",
+        text: "Our vision is to become the leading online platform where people can transform their spare time into meaningful rewards and personal development. We aspire to create a global community of users who benefit from our innovative and diverse range of activities. We aim to continually evolve and expand our offerings, making AKU the go-to destination for individuals seeking financial empowerment and self-improvement. We are dedicated to shaping a future where anyone can easily access opportunities that enhance their lives, all while contributing positively to the digital landscape.",
+    },
+
+]
+
+export const works = [
+    {
+        icon: "fluent:people-community-20-regular",
+        title: "Welcome Bonus",
+        text: "A commission you get as a new user when you proficiently Sign Up.",
+    },
+    {
+        icon: "arcticons:moneytracker",
+        title: "Non-Affiliate Earnings",
+        text: " Earn Points by engaging with content – reading, commenting, and sharing.",
+    },
+    {
+        icon: "fluent:people-community-20-regular",
+        title: "Community Engagement",
+        text: "Connect with others, share experiences, and learn from a like-minded community focused on financial empowerment.",
+    },
+    {
+        icon: "arcticons:moneytracker",
+        title: "Affiliate Earnings",
+        text: "It is a commission you get when you effectively a new user using your affiliate link.",
+    },
+    {
+        icon: "arcticons:moneytracker",
+        title: "Daily Visits",
+        text: "Bonus you get when you visit and explore the site daily.",
+    },
+    {
+        icon: "arcticons:moneytracker",
+        title: "AKU Socials",
+        text: "Earn commissions by actively participating in social media tasks.",
+    },
+]
+
+interface regInfoProps {
+    placeholder: string;
+    name: string;
+    type: string;
+}
+
+export const regInfo = [
+    {
+        placeholder: "First Name",
+        name: "firstName",
+        type: "text",
+    },
+    {
+        placeholder: "Last Name",
+        name: "lastName",
+        type: "text",
+    },
+    {
+        placeholder: "Username",
+        name: "userName",
+        type: "text",
+    },
+    {
+        placeholder: "Enter your e-mail",
+        name: "email",
+        type: "email",
+    },
+    {
+        placeholder: "Phone No.",
+        name: "phoneNo",
+        type: "text",
+    },
+    {
+        placeholder: "Password",
+        name: "password",
+        type: "password",
+    },
+    // {
+    //     placeholder: "Coupon Code",
+    //     name: "couponCode",
+    //     type: "text",
+    // }
+] as regInfoProps[];
