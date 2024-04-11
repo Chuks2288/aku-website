@@ -47,7 +47,9 @@ export const ResetSchema = z.object({
 });
 
 export const CodeVerificationSchema = z.object({
-    code: z.string(),
+    code: z.string().min(6, {
+        message: "Your one-time password must be 6 characters.",
+    }),
 });
 
 export const NewPasswordSchema = z.object({
