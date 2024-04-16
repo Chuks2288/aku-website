@@ -3,7 +3,7 @@
 import * as z from "zod";
 import { db } from "@/lib/db";
 import { getUserByEmail } from "@/lib/user";
-import { getPasswordResetTokenByToken, getPasswordTwoFactorTokenByEmail } from "@/data/password-twofactor-token";
+import { getPasswordTwoFactorTokenByEmail } from "@/data/password-twofactor-token";
 import { CodeVerificationSchema } from "@/schema";
 import { getPasswordTwoFactorConfirmationByUserId } from "@/data/password-twofactor-confirmation";
 
@@ -43,9 +43,9 @@ export const codeVerification = async (
                 return { error: "Code expired" }
             }
 
-            await db.passwordTwoFactorToken.delete({
-                where: { id: passwordTwoFactorToken.id }
-            });
+            // await db.passwordTwoFactorToken.delete({
+            //     where: { id: passwordTwoFactorToken.id }
+            // });
 
             const existingConfirmation = await getPasswordTwoFactorConfirmationByUserId(
                 existingUser.id
@@ -61,12 +61,11 @@ export const codeVerification = async (
                 data: {
                     userId: existingUser.id,
                 }
-            })
+            });
+
+            return { success: "Code verified!", token: passwordTwoFactorToken.token };
         }
     }
 
-
-
-
-    return { success: "Code verified!" };
+    return { error: "Code verification failed" };
 }

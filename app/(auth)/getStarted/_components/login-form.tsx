@@ -24,6 +24,7 @@ import { login } from "@/actions/login"
 
 
 export const LoginForm = () => {
+    const router = useRouter();
     const searchParams = useSearchParams();
     const callbackUrl = searchParams.get("callbackUrl");
     const [error, setError] = useState<string | undefined>("");
@@ -51,6 +52,7 @@ export const LoginForm = () => {
                     if (data?.success) {
                         form.reset();
                         setSuccess(data.success);
+                        router.refresh();
                     }
                 })
                 .catch(() => setError("Something went wrong"));

@@ -1,8 +1,15 @@
 import Image from "next/image"
 import { NewPasswordForm } from "./_components/new-password-form"
+import { getUserByEmail } from "@/lib/user"
+import { getPasswordTwoFactorTokenByEmail } from "@/data/password-twofactor-token";
 
 
-const NewPasswordPage = () => {
+const NewPasswordPage = async ({ email }: { email: string }) => {
+
+    // const currentEmail = await getUserByEmail(email);
+    const tokenData = await getPasswordTwoFactorTokenByEmail(email);
+
+
     return (
         <div
             className="sm:h-[80vh] h-[60vh]"
@@ -17,7 +24,10 @@ const NewPasswordPage = () => {
                         />
                     </div>
                 </div>
-                <NewPasswordForm />
+                <NewPasswordForm
+                    token={tokenData}
+                // email={currentEmail}
+                />
             </div>
         </div>
     )

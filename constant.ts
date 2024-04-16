@@ -59,22 +59,43 @@ export const ourServiceItems = [
     {
         icon: "arcticons:moneytracker",
         title: "Referral Program:",
-        text: 'A referral system that allows users to invite others to join "AKU" and earn rewards for successful referrals, encouraging user growth.'
+        description: 'A referral system that allows users to invite others to join "AKU" and earn rewards for successful referrals, encouraging user growth.'
     },
     {
         icon: "fluent:people-community-20-regular",
         title: "Community and Support:",
-        text: 'A referral system that allows users to invite others to join "AKU" and earn rewards for successful referrals, encouraging user growth.'
+        description: 'A referral system that allows users to invite others to join "AKU" and earn rewards for successful referrals, encouraging user growth.'
     },
     {
         icon: "fluent-mdl2:market",
         title: "News and Market Updates:",
-        text: 'A referral system that allows users to invite others to join "AKU" and earn rewards for successful referrals, encouraging user growth.'
+        description: 'A referral system that allows users to invite others to join "AKU" and earn rewards for successful referrals, encouraging user growth.'
     },
     {
         icon: "arcticons:moneytracker",
         title: "Referral Program:",
-        text: 'A referral system that allows users to invite others to join "AKU" and earn rewards for successful referrals, encouraging user growth.'
+        description: 'A referral system that allows users to invite others to join "AKU" and earn rewards for successful referrals, encouraging user growth.'
+    },
+
+    {
+        icon: "arcticons:moneytracker",
+        title: "Affiliate Earnings:",
+        description: 'It is a commission you get when you effectively a new user using your affiliate link.'
+    },
+    {
+        icon: "arcticons:moneytracker",
+        title: "AKU Socials:",
+        description: 'Earn commissions by actively participating in social media tasks.'
+    },
+    {
+        icon: "arcticons:moneytracker",
+        title: "Non-Affiliate Earnings:",
+        description: ' Earn Points by engaging with content – reading, commenting, and sharing. '
+    },
+    {
+        icon: "arcticons:moneytracker",
+        title: "Non-Affiliate Earnings:",
+        description: 'It is a commission you get when you effectively a new user using your affiliate link.'
     },
 ];
 
@@ -170,3 +191,113 @@ export const regInfo = [
     //     type: "text",
     // }
 ] as regInfoProps[];
+
+export const options = [
+    {
+        icon: "arcticons:moneytracker",
+        title: "AKU Activity Earnings:",
+        description: "Our unique AKU Activity Earnings system allows you to accumulate points by participating in social media tasks. Your active involvement contributes to your financial growth.",
+    },
+    {
+        icon: "fluent:people-community-20-regular",
+        title: "Thriving Community Support:",
+        description: "Join a vibrant community of individuals passionate about financial empowerment. Share experiences, seek advice, and celebrate successes together.",
+    },
+    {
+        icon: "fluent-mdl2:market",
+        title: "Regular Updates and Features:",
+        description: "Stay ahead with our regular updates on market trends, financial news, and new features on the AKU platform",
+    },
+    {
+        icon: "material-symbols-light:quiz-outline-sharp",
+        title: "Dedicated Customer Support:",
+        description: "Experience top-notch customer support. Our team is here to assist you, whether you have questions about our services or need guidance on your financial endeavors.",
+    },
+];
+
+export const coupons = [
+    {
+        logo: "/logo.svg",
+        name: "Uche Ben",
+        bank: "Bank: UBA",
+        icon: "logos:whatsapp-icon",
+        contact: +2348182317516,
+    },
+    {
+        logo: "/logo.svg",
+        name: "Ugochinyerem",
+        bank: "Bank: Opay",
+        icon: "logos:whatsapp-icon",
+        contact: +2348182317516,
+    },
+    {
+        logo: "/logo.svg",
+        name: "Chinonso",
+        bank: "Bank: Opay",
+        icon: "logos:whatsapp-icon",
+        contact: +2348182317516,
+    },
+    {
+        logo: "/logo.svg",
+        name: "Witty",
+        bank: "Bank: Opay",
+        icon: "logos:whatsapp-icon",
+        contact: +2348182317516,
+    },
+    {
+        logo: "/logo.svg",
+        name: "Abigail",
+        bank: "Bank: Opay",
+        icon: "logos:whatsapp-icon",
+        contact: +2348182317516,
+    },
+    {
+        logo: "/logo.svg",
+        name: "Sophia",
+        bank: "Bank: Opay",
+        icon: "logos:whatsapp-icon",
+        contact: +2348182317516,
+    },
+    {
+        logo: "/logo.svg",
+        name: "Emmanuel",
+        bank: "Bank: Opay",
+        icon: "logos:whatsapp-icon",
+        contact: +2348182317516,
+    },
+    {
+        logo: "/logo.svg",
+        name: "Sylvester",
+        bank: "Bank: Opay",
+        icon: "logos:whatsapp-icon",
+        contact: +2348182317516,
+    },
+    {
+        logo: "/logo.svg",
+        name: "John Kennis",
+        bank: "Bank: Opay",
+        icon: "logos:whatsapp-icon",
+        contact: +2348182317516,
+    },
+    {
+        logo: "/logo.svg",
+        name: "Michael",
+        bank: "Bank: Opay",
+        icon: "logos:whatsapp-icon",
+        contact: +2348182317516,
+    },
+    {
+        logo: "/logo.svg",
+        name: "Johnson",
+        bank: "Bank: Opay",
+        icon: "logos:whatsapp-icon",
+        contact: +2348182317516,
+    },
+    {
+        logo: "/logo.svg",
+        name: "Prince",
+        bank: "Bank: Opay",
+        icon: "logos:whatsapp-icon",
+        contact: +2348182317516,
+    },
+]

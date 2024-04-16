@@ -39,6 +39,7 @@ export const login = async (
             password,
             redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
         })
+
     } catch (error) {
         if (error instanceof AuthError) {
             switch (error.type) {
@@ -50,4 +51,5 @@ export const login = async (
         }
     }
 
+    return { success: "You logged-in successfully" }
 }

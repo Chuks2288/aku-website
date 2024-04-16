@@ -53,7 +53,19 @@ export const CodeVerificationSchema = z.object({
 });
 
 export const NewPasswordSchema = z.object({
-    password: z.string().min(6, {
-        message: "Minimum of 6 characters required",
+    password: z.string().min(8, {
+        message: "Password must be at least 8 characters long",
+    }).regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[0-9a-zA-Z!@#$%^&*()_+]+$/, {
+        message: "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character"
     }),
-});
+    confirmPassword: z.optional(z.string().min(8)),
+})
+// .refine((data) => {
+//     if (data.confirmPassword !== data.password) {
+//         return false;
+//     }
+
+//     return true;
+// }, {
+//     message: "The Password does not match"
+// });

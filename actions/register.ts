@@ -34,7 +34,6 @@ export const register = async (values: z.infer<typeof RegisterSChema>) => {
         return { error: "username already in use!" }
     }
 
-
     await db.user.create({
         data: {
             firstName,

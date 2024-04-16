@@ -19,11 +19,24 @@ import { FormSuccess } from "@/components/form-success";
 import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
-import { reset } from "@/actions/reset";
-import { useRouter } from "next/navigation";
+import { newPassword } from "@/actions/new-password";
+import { useRouter, useSearchParams } from "next/navigation";
 
 
-export const NewPasswordForm = () => {
+interface Props {
+    token: any;
+    // email?: string | null;
+    email?: any;
+}
+
+
+export const NewPasswordForm = ({
+    token,
+    email
+}: Props) => {
+
+
+    console.log(token);
 
     const router = useRouter();
     const [error, setError] = useState<string | undefined>("");
@@ -34,6 +47,7 @@ export const NewPasswordForm = () => {
         resolver: zodResolver(NewPasswordSchema),
         defaultValues: {
             password: "",
+            confirmPassword: "",
         }
     });
 
@@ -42,14 +56,19 @@ export const NewPasswordForm = () => {
         setSuccess("");
 
         startTransition(() => {
-            reset(values)
+            newPassword(values, token.token)
                 .then((data: any) => {
-                    setError(data?.error);
-                    setSuccess(data?.success);
+                    if (data?.error) {
+                        setError(data?.error);
+                    }
+
+                    if (data?.success) {
+                        setSuccess(data?.success);
+
+                    }
                 })
                 .catch(() => setError("Something went wrong"));
         })
-
     }
 
     return (
@@ -57,18 +76,16 @@ export const NewPasswordForm = () => {
             <div className="md:w-[480px] w-full mx-auto px-4 space-y-6">
                 <div className="flex items-center justify-center">
                     <Image
-                        src="/padlock.svg"
+                        src="/unlock.svg"
                         alt="Padlock"
                         width={60}
                         height={60}
                     />
                 </div>
                 <div className="text-center space-y-2">
-                    <h1 className="md:text-2xl text-xl font-bold leading-[50px]">
-                        Forgotten Password
-                    </h1>
                     <p className="text-xs">
-                        Enter your email address to get a reset code
+                        Your new password must be different from your previous <br />
+                        password
                     </p>
                 </div>
                 <Form {...form} >
@@ -76,7 +93,6 @@ export const NewPasswordForm = () => {
                         onSubmit={form.handleSubmit(onSubmit)}
                         className="space-y-6"
                     >
-
                         <div className="space-y-4">
                             <FormField
                                 control={form.control}
@@ -87,8 +103,27 @@ export const NewPasswordForm = () => {
                                             <Input
                                                 {...field}
                                                 disabled={isPending}
-                                                placeholder="Email"
+                                                placeholder="New Password"
                                                 className="w-full border-b-1.5 text-sm border-x-0 border-t-0 rounded-none border-black/15 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0"
+                                                type="password"
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="confirmPassword"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <Input
+                                                {...field}
+                                                disabled={isPending}
+                                                placeholder="Confirm Password"
+                                                className="w-full border-b-1.5 text-sm border-x-0 border-t-0 rounded-none border-black/15 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0"
+                                                type="password"
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -98,7 +133,6 @@ export const NewPasswordForm = () => {
                         </div>
                         <FormError message={error} />
                         <FormSuccess message={success} />
-
                         <Button
                             variant="primary"
                             disabled={isPending}
@@ -110,7 +144,7 @@ export const NewPasswordForm = () => {
                                     className="animate-spin w-5 h-5"
                                 />
                             ) : (
-                                "Send"
+                                "Save"
                             )}
                         </Button>
                     </form>

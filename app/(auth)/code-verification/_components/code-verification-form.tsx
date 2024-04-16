@@ -30,7 +30,7 @@ import { useResetForm } from "@/hooks/use-reset-form";
 import { codeVerification } from "@/actions/code-verification";
 
 
-const SendResetEmailButton = ({ email }: { email: string }) => {
+const SendResetEmailButton = ({ email }: { email: string, }) => {
     const { sendResetEmail, isPending } = useResetForm();
 
     const handleSendEmail = () => {
@@ -52,13 +52,16 @@ const SendResetEmailButton = ({ email }: { email: string }) => {
     );
 }
 
-export const CodeVerificationForm = ({ email }: { email: string | any }) => {
+export const CodeVerificationForm = ({ email }: { email: string | any, }) => {
     const router = useRouter();
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
     const [isPending, startTransition] = useTransition();
-    const [timer, setTimer] = useState<number>(10);
+    const [timer, setTimer] = useState<number>(2);
+    // const [timer, setTimer] = useState<number>(Math.max(0, Math.floor((tokenExpiration - Date.now()) / 1000)));
+    // const [timer, setTimer] = useState<any>(tokenExpiration);
 
+    // console.log("Token Expiration:", timer);
 
     const form = useForm<z.infer<typeof CodeVerificationSchema>>({
         resolver: zodResolver(CodeVerificationSchema),
@@ -90,20 +93,23 @@ export const CodeVerificationForm = ({ email }: { email: string | any }) => {
         });
     };
 
-
     useEffect(() => {
-        const countdownInterval = setInterval(() => {
-            setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
-        }, 1000);
+        // Start countdown interval if timer is initially greater than 0
+        if (timer > 0) {
+            const countdownInterval = setInterval(() => {
+                setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
+            }, 1000);
 
-        return () => clearInterval(countdownInterval);
-    }, []);
-
-    useEffect(() => {
-        if (timer === 0) {
-            // Handle timer reaching 0
+            // Clear interval when component unmounts or timer reaches 0
+            return () => clearInterval(countdownInterval);
         }
-    }, [timer]);
+    }, [timer]); // Depend on timer state
+
+    // useEffect(() => {
+    //     if (timer === 0) {
+    //         // Handle timer reaching 0
+    //     }
+    // }, [timer]);
 
 
 
@@ -130,6 +136,7 @@ export const CodeVerificationForm = ({ email }: { email: string | any }) => {
                                                 <InputOTPGroup className="gap-x-6 w-full flex items-center justify-evenly">
                                                     {[...Array(6)].map((_, index) => (
                                                         <InputOTPSlot
+                                                            key={index}
                                                             index={index}
                                                             {...field}
                                                             className="border-[1px] rounded-md"

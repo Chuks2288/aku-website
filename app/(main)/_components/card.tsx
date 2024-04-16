@@ -5,13 +5,13 @@ import { motion } from "framer-motion";
 type Props = {
     icon: string;
     title: string;
-    text: string;
+    description: string;
 }
 
 export const Card = ({
     icon,
     title,
-    text
+    description
 }: Props) => {
     return (
         <motion.div
@@ -25,7 +25,7 @@ export const Card = ({
                 {title}
             </h4>
             <p className='text-center font-normal text-sm'>
-                {text}
+                {description}
             </p>
         </motion.div>
     )
