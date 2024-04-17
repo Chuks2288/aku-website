@@ -16,7 +16,7 @@ export const Hero = () => {
                 whileInView={{ opacity: [0, 1] }}
                 transition={{ duration: 0.5, ease: 'easeInOut' }}
                 className="flex md:flex-row flex-col items-center px-3 justify-between gap-x-4 max-w-[1200px] mx-auto flex-1 w-full">
-                <div className="max-w-[370px] space-y-6 flex flex-col">
+                <div className="max-w-[400px] space-y-6 flex flex-col">
                     <h1 className="text-[2rem] lg:text-[2.7rem] font-bold tracking-widest leading-[50px]">
                         Empowering Your Financial Future
                     </h1>

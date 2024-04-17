@@ -26,42 +26,21 @@ import { FormSuccess } from "@/components/form-success";
 import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
-import { useResetForm } from "@/hooks/use-reset-form";
 import { codeVerification } from "@/actions/code-verification";
+import { SendResetEmailButton } from "./send-resetemail-button";
 
-
-const SendResetEmailButton = ({ email }: { email: string, }) => {
-    const { sendResetEmail, isPending } = useResetForm();
-
-    const handleSendEmail = () => {
-        sendResetEmail(email);
-    };
-
-    return (
-        <Button
-            variant="ghost"
-            disabled={isPending}
-            onClick={handleSendEmail}
-            className="text-blue-700"
-        >
-            {isPending ?
-                <Loader2 className="animate-spin w-5 h-5" />
-                : "Resend"
-            }
-        </Button>
-    );
+interface Props {
+    email: any;
 }
 
-export const CodeVerificationForm = ({ email }: { email: string | any, }) => {
+export const CodeVerificationForm = ({
+    email
+}: Props) => {
     const router = useRouter();
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
     const [isPending, startTransition] = useTransition();
     const [timer, setTimer] = useState<number>(2);
-    // const [timer, setTimer] = useState<number>(Math.max(0, Math.floor((tokenExpiration - Date.now()) / 1000)));
-    // const [timer, setTimer] = useState<any>(tokenExpiration);
-
-    // console.log("Token Expiration:", timer);
 
     const form = useForm<z.infer<typeof CodeVerificationSchema>>({
         resolver: zodResolver(CodeVerificationSchema),
@@ -94,22 +73,16 @@ export const CodeVerificationForm = ({ email }: { email: string | any, }) => {
     };
 
     useEffect(() => {
-        // Start countdown interval if timer is initially greater than 0
         if (timer > 0) {
             const countdownInterval = setInterval(() => {
                 setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
             }, 1000);
 
-            // Clear interval when component unmounts or timer reaches 0
             return () => clearInterval(countdownInterval);
         }
-    }, [timer]); // Depend on timer state
+    }, [timer]);
 
-    // useEffect(() => {
-    //     if (timer === 0) {
-    //         // Handle timer reaching 0
-    //     }
-    // }, [timer]);
+
 
 
 

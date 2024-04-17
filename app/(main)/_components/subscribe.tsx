@@ -16,11 +16,14 @@ import { Input } from "@/components/ui/input";
 import { SubscribeSchema } from "@/schema";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { subscribe } from "@/actions/subscribe";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
 
 
 export const Subscribe = () => {
-    const [error, setError] = useState();
-    const [success, setSuccess] = useState();
+    const [error, setError] = useState<string | undefined>("");
+    const [success, setSuccess] = useState<string | undefined>("");
     const [isPending, startTransition] = useTransition();
 
     const form = useForm<z.infer<typeof SubscribeSchema>>({
@@ -33,8 +36,22 @@ export const Subscribe = () => {
 
     // TODO: Remember to work on the server action
     const onSubmit = (values: z.infer<typeof SubscribeSchema>) => {
-        console.log(values)
+        setError("");
+        setSuccess("");
 
+        startTransition(() => {
+            subscribe(values)
+                .then((data: any) => {
+                    if (data?.error) {
+                        setError(data.error)
+                    }
+                    if (data?.success) {
+                        form.reset();
+                        setSuccess(data.success);
+                    }
+                })
+                .catch(() => setError("Something went wrong"));
+        })
     }
 
     return (
@@ -87,11 +104,10 @@ export const Subscribe = () => {
                                             <Checkbox
                                                 disabled={isPending}
                                                 checked={field.value}
-                                                // onChecked={field.onChange}
-                                                // onChecked={(checked: any) => field.onChange(checked)}
+                                                onCheckedChange={field.onChange}
                                                 className="border-gray-400"
                                             />
-                                            <p className="text-muted-forground text-sm max-w-full shrink-0">
+                                            <p className="text-muted-forground text-xs max-w-full shrink-0">
                                                 I agree to my email being used to receive the newsletter
                                             </p>
                                         </div>
@@ -100,6 +116,8 @@ export const Subscribe = () => {
                                 </FormItem>
                             )}
                         />
+                        <FormError message={error} />
+                        <FormSuccess message={success} />
                     </form>
                 </Form>
             </div>

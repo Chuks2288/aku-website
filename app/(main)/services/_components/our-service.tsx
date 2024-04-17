@@ -7,7 +7,7 @@ import { Card } from "../../_components/card"
 
 export const OurService = () => {
     return (
-        <div className="h-max p-2 pb-10">
+        <div className="h-max p-2 pb-10 bg-gray-50">
             <div className="max-w-[1200px] mx-auto px-3">
                 <motion.div
                     className="pt-6 grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-8">

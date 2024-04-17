@@ -1,7 +1,7 @@
 "use client";
 
 import * as z from "zod";
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -20,23 +20,18 @@ import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { newPassword } from "@/actions/new-password";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 interface Props {
-    token: any;
-    // email?: string | null;
-    email?: any;
+    email: any;
 }
 
 
 export const NewPasswordForm = ({
-    token,
     email
 }: Props) => {
-
-
-    console.log(token);
 
     const router = useRouter();
     const [error, setError] = useState<string | undefined>("");
@@ -56,7 +51,7 @@ export const NewPasswordForm = ({
         setSuccess("");
 
         startTransition(() => {
-            newPassword(values, token.token)
+            newPassword(values, email)
                 .then((data: any) => {
                     if (data?.error) {
                         setError(data?.error);
@@ -64,7 +59,7 @@ export const NewPasswordForm = ({
 
                     if (data?.success) {
                         setSuccess(data?.success);
-
+                        router.push("/getStarted");
                     }
                 })
                 .catch(() => setError("Something went wrong"));
@@ -147,6 +142,16 @@ export const NewPasswordForm = ({
                                 "Save"
                             )}
                         </Button>
+                        <Link href="/getStarted">
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                asChild
+                                className="underline"
+                            >
+                                Back to Login
+                            </Button>
+                        </Link>
                     </form>
                 </Form>
             </div>

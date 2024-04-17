@@ -1,6 +1,7 @@
-import { Button } from "@/components/ui/button"
-import { infoItems } from "@/constant"
+
 import Link from "next/link"
+
+import { infoItems } from "@/constant"
 
 
 export const FooterInfo = () => {

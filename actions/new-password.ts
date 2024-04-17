@@ -1,47 +1,56 @@
+"use server";
+
 import * as z from "zod";
 import bcrypt from "bcryptjs";
 
 import { NewPasswordSchema } from "@/schema";
-import { getPasswordTwoFactorTokenByEmail } from "@/data/password-twofactor-token";
-import { getUserByEmail } from "@/lib/user";
 import { db } from "@/lib/db";
+import { getUserByEmail } from "@/lib/user";
+import { getPasswordTwoFactorTokenByEmail } from "@/data/password-twofactor-token";
+import { getPasswordTwoFactorConfirmationByUserId } from "@/data/password-twofactor-confirmation";
 
 export const newPassword = async (
     values: z.infer<typeof NewPasswordSchema>,
-    token?: string | null,
+    email: string,
 ) => {
-    if (!token) {
-        return { error: "Missing token!" };
-    }
-
     const validatedFields = NewPasswordSchema.safeParse(values);
 
     if (!validatedFields.success) {
-        return { error: "Invalid fields!" };
+        return { error: "Invalid fields" };
     }
 
     const { password, confirmPassword } = validatedFields.data;
 
     if (confirmPassword !== password) {
-        return { error: "Password does not match" }
+        return { error: "Passwords do not match" };
     }
 
-    const existingToken = await getPasswordTwoFactorTokenByEmail(token);
-
-    if (!existingToken) {
-        return { error: "Invalid token!" };
-    }
-
-    const hasExpired = new Date(existingToken.expires) < new Date();
-
-    if (hasExpired) {
-        return { error: "Token has expired!" };
-    }
-
-    const existingUser = await getUserByEmail(existingToken.email);
+    const existingUser = await getUserByEmail(email);
 
     if (!existingUser) {
-        return { error: "Email does not exist!" }
+        return { error: "User not found" };
+    }
+
+    const passwordTwoFactorToken = await getPasswordTwoFactorTokenByEmail(email);
+
+    if (!passwordTwoFactorToken) {
+        return { error: "Invalid or expired token" };
+    }
+
+    // Assuming the code verification token is also used as a confirmation for setting a new password
+    const existingConfirmation = await getPasswordTwoFactorConfirmationByUserId(existingUser.id);
+
+    // if (!existingConfirmation || existingConfirmation.token !== passwordTwoFactorToken.token) {
+    //     return { error: "Code verification not completed" };
+    // }
+    if (!existingConfirmation) {
+        return { error: "Code verification not completed" };
+    }
+
+    const hasExpired = new Date(passwordTwoFactorToken.expires) < new Date();
+
+    if (hasExpired) {
+        return { error: "Token has expired" };
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -51,8 +60,9 @@ export const newPassword = async (
         data: { password: hashedPassword },
     });
 
-    await db.passwordTwoFactorToken.delete({
-        where: { id: existingToken.id }
+    // Clean up password two-factor confirmation token after setting the new password
+    await db.passwordTwoFactorConfirmation.delete({
+        where: { id: existingConfirmation.id },
     });
 
     return { success: "Password updated successfully!" };

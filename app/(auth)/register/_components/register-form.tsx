@@ -7,13 +7,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 
 import { RegisterSChema } from "@/schema";
-import { regInfo } from "@/constant";
 import {
     Form,
     FormControl,
     FormField,
     FormItem,
-    FormLabel,
     FormMessage
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
@@ -40,6 +38,7 @@ export const RegisterForm = () => {
             email: "",
             phoneNo: "",
             password: "",
+            // TODO: Work on the Coupon code
             // couponCode: "",
         }
     });

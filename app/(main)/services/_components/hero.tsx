@@ -8,7 +8,7 @@ export const Hero = () => {
         <motion.div
             whileInView={{ opacity: [0, 1] }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="h-[90vh] 2xl:h-[50vh]"
+            className="h-[90vh] 2xl:h-[50vh] bg-gray-50"
         >
             <div className="max-w-[1200px] mx-auto h-full">
                 <div className="flex flex-1 lg:flex-row flex-col justify-between w-full h-full gap-4">

@@ -23,7 +23,11 @@ export const CouponCard = ({
 
     return (
         <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            <motion.div className="flex items-center justify-between gap-x-4 h-15 bg-gray-100 p-2 rounded-md">
+            <motion.div
+                whileInView={{ opacity: [0, 1] }}
+                transition={{ duration: 0.5, ease: 'easeInOut' }}
+                className="flex items-center justify-between gap-x-4 h-15 bg-gray-100 p-2 rounded-md"
+            >
                 <div className="flex items-center gap-x-4">
                     <div className="w-16 h-16 rounded-full flex items-center justify-center bg-green-200">
                         <Image

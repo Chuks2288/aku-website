@@ -12,7 +12,7 @@ const CouponPage = () => {
         <motion.div
             whileInView={{ opacity: [0, 1] }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="h-max py-6"
+            className="h-max py-6 bg-gray-50"
         >
             <div className="max-w-[1200px] mx-auto px-3 h-full space-y-10 flex flex-col justify-center items-center">
                 <h2 className="font-bold text-xl text-center">

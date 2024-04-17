@@ -58,3 +58,18 @@ model PasswordTwoFactorConfirmation {
 
   @@unique([userId])
 }
+
+model EmailSubscribeSchema {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  isTermsEnabled Boolean? @default(false)
+}
+
+model FormMessage {
+  id      String @id @default(cuid())
+  name    String
+  email   String
+  phoneNo String
+  subject String
+  message String
+}

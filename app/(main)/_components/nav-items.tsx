@@ -1,9 +1,11 @@
 "use client";
 
+import { usePathname, useRouter } from "next/navigation";
+
+import { cn } from "@/lib/utils";
+
 import { Button } from "@/components/ui/button";
 import { navItems } from "@/constant";
-import { cn } from "@/lib/utils";
-import { usePathname, useRouter } from "next/navigation";
 
 type Props = {
     className: string;

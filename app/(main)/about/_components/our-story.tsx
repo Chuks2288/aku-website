@@ -8,7 +8,7 @@ export const OurStory = () => {
         <motion.div
             whileInView={{ opacity: [0, 1] }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="h-[70vh] 2xl:h-[50vh] bg-white px-3"
+            className="h-[70vh] 2xl:h-[50vh] bg-gray-50 px-3"
         >
             <div className="relative flex items-center justify-center">
                 <div className="absolute top-[-3rem] sm:min-w-[33rem] min-w-full min-h-max bg-[#F3F7FC] rounded-tl-[6rem] rounded-br-[6rem] py-10">

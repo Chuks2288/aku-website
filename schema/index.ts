@@ -28,6 +28,7 @@ export const RegisterSChema = z.object({
     }).regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[0-9a-zA-Z!@#$%^&*()_+]+$/, {
         message: "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character"
     }),
+    // TODO: Coupon Code
     // couponCode: z.string().max(20),
 })
 
@@ -60,12 +61,21 @@ export const NewPasswordSchema = z.object({
     }),
     confirmPassword: z.optional(z.string().min(8)),
 })
-// .refine((data) => {
-//     if (data.confirmPassword !== data.password) {
-//         return false;
-//     }
 
-//     return true;
-// }, {
-//     message: "The Password does not match"
-// });
+export const FormMessageSchema = z.object({
+    name: z.string().min(1, {
+        message: "FirstName is required",
+    }),
+    email: z.string().email({
+        message: "Email is required"
+    }),
+    phoneNo: z.string().min(10, {
+        message: "Phone number should be a 10-digit number and above",
+    }),
+    subject: z.string().min(1, {
+        message: "subject is required",
+    }),
+    message: z.string().min(1, {
+        message: "message is required",
+    }),
+})
