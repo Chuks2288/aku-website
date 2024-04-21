@@ -301,3 +301,31 @@ export const coupons = [
         contact: +2348182317516,
     },
 ]
+
+
+export const profiles = [
+    {
+        title: "Account Settings",
+        path: "/settings",
+    },
+    {
+        title: "Community",
+        path: "/community",
+    },
+    {
+        title: "Referrals",
+        path: "/referrals",
+    },
+    {
+        title: "News Feed",
+        path: "/news-feed",
+    },
+    {
+        title: "Withdrawals",
+        path: "/withdrawals",
+    },
+    {
+        title: "Feedback",
+        path: "/feedback",
+    },
+]

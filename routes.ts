@@ -10,6 +10,7 @@ export const publicRoutes = [
     "/coupon",
     "/contact",
     "/auth/new-verification",
+    "/api/uploadthing",
 ]
 
 /**

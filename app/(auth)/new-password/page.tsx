@@ -3,7 +3,8 @@ import Image from "next/image"
 import { NewPasswordForm } from "./_components/new-password-form"
 
 const NewPasswordPage = async () => {
-
+    // TODO: Try to update the email of the current user
+    // and also remember the three step verification for reset, code-verification and new-password
     return (
         <div
             className="sm:h-[80vh] h-[60vh]"

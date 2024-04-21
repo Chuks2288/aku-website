@@ -34,7 +34,7 @@ export const Subscribe = () => {
         }
     });
 
-    // TODO: Remember to work on the server action
+
     const onSubmit = (values: z.infer<typeof SubscribeSchema>) => {
         setError("");
         setSuccess("");

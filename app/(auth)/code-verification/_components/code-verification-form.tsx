@@ -40,7 +40,7 @@ export const CodeVerificationForm = ({
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
     const [isPending, startTransition] = useTransition();
-    const [timer, setTimer] = useState<number>(2);
+    const [timer, setTimer] = useState<number>(300);
 
     const form = useForm<z.infer<typeof CodeVerificationSchema>>({
         resolver: zodResolver(CodeVerificationSchema),

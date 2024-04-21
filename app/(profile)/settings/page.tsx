@@ -1,18 +1,26 @@
-import { Button } from "@/components/ui/button";
 
-import { LogoutButton } from "@/components/logout-button";
+import { currentUser } from "@/lib/auth";
+import { UserProfileEdit } from "./_components/user-profile-edit";
+import { logout } from "@/actions/logout";
+import { User } from "@prisma/client";
+import { UserEditForm } from "./_components/user-edit-form";
 
-const SettingsPage = () => {
+const SettingsPage = async () => {
+
+    const user = await currentUser();
+
+    if (!user) {
+        logout();
+    }
+
     return (
-        <div>
-            <LogoutButton>
-                <Button
-                    variant="primary"
-                    size="sm"
-                >
-                    Logout
-                </Button>
-            </LogoutButton>
+        <div className="w-full h-full flex flex-col gap-y-6">
+            <UserProfileEdit
+                user={user as User}
+            />
+            <UserEditForm
+                user={user as User}
+            />
         </div>
     )
 }

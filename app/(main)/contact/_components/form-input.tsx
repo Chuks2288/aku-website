@@ -62,11 +62,11 @@ export const FormInput = () => {
         <motion.div
             whileInView={{ opacity: [0, 1] }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="lg:h-[70vh] h-[80vh]"
+            className="h-[70vh]"
         >
             <div className="max-w-[1200px] mx-auto px-3 h-full">
                 <div className="flex justify-center items-center relative">
-                    <div className="absolute -top-20 min-w-[500px] drop-shadow-sm rounded-sm shadow-md p-4 bg-white">
+                    <div className="absolute -top-20 lg:min-w-[500px] min-w-full drop-shadow-sm rounded-sm shadow-md p-4 bg-white">
                         <Form {...form}>
                             <form
                                 onSubmit={form.handleSubmit(onSubmit)}
@@ -89,7 +89,7 @@ export const FormInput = () => {
                                         </FormItem>
                                     )}
                                 />
-                                <div className="gap-8 flex md:flex-row flex-col w-full ">
+                                <div className="flex lg:flex-row flex-col w-full justify-between gap-8">
                                     <FormField
                                         control={form.control}
                                         name="email"
@@ -117,7 +117,7 @@ export const FormInput = () => {
                                                         {...field}
                                                         disabled={isPending}
                                                         placeholder="phone"
-                                                        className="w-full text-sm focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 bg-gray-100 border-none"
+                                                        className="w-full ml-auto text-sm focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 bg-gray-100 border-none"
                                                     />
                                                 </FormControl>
                                                 <FormMessage />

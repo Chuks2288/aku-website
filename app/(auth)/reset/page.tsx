@@ -3,6 +3,7 @@ import { ResetForm } from "./_components/reset-form"
 
 
 const ResetPage = () => {
+    // and also remember the three step verification for reset, code-verification and new-password
     return (
         <div
             className="sm:h-[80vh] h-[60vh]"

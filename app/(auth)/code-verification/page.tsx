@@ -4,7 +4,8 @@ import { reset } from "@/actions/reset";
 
 
 const CodeVerificationPage = async () => {
-
+    // TODO: Try to update the email of the current user
+    // and also remember the three step verification for reset, code-verification and new-password
     return (
         <div className="">
             <div

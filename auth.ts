@@ -6,7 +6,29 @@ import { db } from "./lib/db"
 
 import { getUserById } from "@/lib/user"
 
+declare module "next-auth" {
+    interface User {
+        email?: string | null,
+        userName?: string | null,
+        phoneNo?: string | null,
+        firstName?: string | null,
+        lastName?: string | null,
+        password?: string | null,
+        balance: any,
+    }
+}
 
+declare module "@auth/core/adapters" {
+    interface adapterUser {
+        email: string | null,
+        userName: string | null,
+        phoneNo: string | null,
+        firstName: string | null,
+        lastName: string | null,
+        password: string | null,
+        balance: any,
+    }
+}
 
 export const {
     handlers: { GET, POST },
@@ -32,7 +54,7 @@ export const {
             const existingUser = await getUserById(user.id);
 
             // Prevent sign in without email verification
-            if (existingUser?.emailVerified) return false;
+            // if (existingUser?.emailVerified) return false;
 
             return true;
         },
@@ -40,11 +62,23 @@ export const {
         async session({ token, session }) {
             if (token.sub && session.user) {
                 session.user.id = token.sub;
+                session.user.email = token.email as string;
+                session.user.userName = token.userName as string;
+                session.user.firstName = token.firstName as string; // Add other properties as needed
+                session.user.lastName = token.lastName as string;
+                session.user.phoneNo = token.phoneNo as string;
+                session.user.password = token.password as string;
+                session.user.balance = token.balance as any;
             }
 
             if (session.user) {
-                session.user.name = token.name;
                 session.user.email = token.email as string;
+                session.user.userName = token.userName as string;
+                session.user.firstName = token.firstName as string; // Add other properties as needed
+                session.user.lastName = token.lastName as string;
+                session.user.phoneNo = token.phoneNo as string;
+                session.user.password = token.password as string;
+                session.user.balance = token.balance as any;
             }
 
             return session
@@ -57,11 +91,13 @@ export const {
 
             if (!existingUser) return token;
 
+            token.email = existingUser.email;
             token.firstName = existingUser.firstName;
             token.lastName = existingUser.lastName;
             token.userName = existingUser.userName;
             token.phoneNo = existingUser.phoneNo;
-            token.email = existingUser.email;
+            token.password = existingUser.password;
+            token.balance = existingUser.balance;
 
             return token;
         }

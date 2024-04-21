@@ -70,12 +70,35 @@ export const FormMessageSchema = z.object({
         message: "Email is required"
     }),
     phoneNo: z.string().min(10, {
-        message: "Phone number should be a 10-digit number and above",
+        message: "Phone number is required",
     }),
     subject: z.string().min(1, {
         message: "subject is required",
     }),
     message: z.string().min(1, {
         message: "message is required",
+    }),
+});
+
+export const UpdateUserSchema = z.object({
+    image: z.optional(z.string().min(1)),
+    firstName: z.optional(z.string().min(1)),
+    lastName: z.optional(z.string().min(1)),
+    userName: z.string().min(1),
+    email: z.string().email(),
+    phoneNo: z.optional(z.string().min(10)),
+});
+
+export const UpdatePasswordSchema = z.object({
+    currentPassword: z.string().min(8, {
+        message: "Password is required"
+    }),
+    newPassword: z.string().min(8, {
+        message: "Password must be at least 8 characters long",
+    }).regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[0-9a-zA-Z!@#$%^&*()_+]+$/, {
+        message: "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character"
+    }),
+    confirmPassword: z.string().min(8, {
+        message: "Password is required"
     }),
 })
