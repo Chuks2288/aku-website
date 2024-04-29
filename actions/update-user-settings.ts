@@ -10,11 +10,11 @@ import { revalidatePath } from "next/cache";
 
 export const updateUserSettings = async (
     values: z.infer<typeof UpdateUserSchema>,
-    // currentPassword: string
+    imageUrl?: string | undefined,
 ) => {
     const validateFields = UpdateUserSchema.safeParse(values);
 
-    if (!validateFields.success) {
+    if (!validateFields) {
         return { error: "Invalid fields" };
     }
 
@@ -48,7 +48,7 @@ export const updateUserSettings = async (
     await db.user.update({
         where: { id: userId.id },
         data: {
-
+            imageUrl,
             ...values,
         },
     });
@@ -56,5 +56,5 @@ export const updateUserSettings = async (
     // Revalidate the /settings path if necessary
     revalidatePath("/settings");
 
-    return { success: "Password Updated" };
+    return { success: "Settings Updated" };
 };

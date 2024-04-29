@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { UpdatePasswordSchema } from "@/schema";
-import { getUserByEmail, getUserById, getUserByUsername } from "@/lib/user";
+import { getUserById } from "@/lib/user";
 import { revalidatePath } from "next/cache";
 
 export const updatePasswordSettings = async (
@@ -42,19 +42,17 @@ export const updatePasswordSettings = async (
     const passwordMatch = await bcrypt.compare(values.currentPassword, userRecord.password as string);
 
     if (!passwordMatch) {
-        return { error: "Incorrect current password" };
+        return { error: "Incorrect old password" };
     }
 
-    // Check if the new password matches the confirmation password
-    if (values.newPassword !== values.confirmPassword) {
-        return { error: "New password and confirmation password do not match" };
-    }
+    // Hash the new password
+    const hashedPassword = await bcrypt.hash(values.newPassword, 10);
 
-    // Update the user with the new password
+    // Update the user with the new hashed password
     await db.user.update({
         where: { id: userId.id },
         data: {
-            password: values.newPassword,
+            password: hashedPassword,
         },
     });
 

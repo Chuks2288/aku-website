@@ -13,21 +13,33 @@ import { UpdateUserSchema } from "@/schema";
 import { updateUserSettings } from "@/actions/update-user-settings";
 import { Edit } from "lucide-react";
 import ActionTooltip from "@/components/action-tooltip";
+import { User } from "@prisma/client";
 
 type Props = {
-    image: string | null;
-    firstName: string | null;
-    lastName: string | null;
+    user: User;
 }
 
 export const ImageEditForm = ({
-    image: initialImage,
-    firstName,
-    lastName,
+    user
 }: Props) => {
     const [isEditing, setIsEditing] = useState(false);
-    const [uploadedImage, setUploadedImage] = useState<string | null>(initialImage);
     const [isPending, startTransition] = useTransition();
+    const [uploadedImage, setUploadedImage] = useState<string | null>(user?.imageUrl);
+
+    const onSubmit = async (imageUrl: string | any) => {
+        startTransition(() => {
+            updateUserSettings(imageUrl)
+                .then((data) => {
+                    if (data?.error) {
+                        toast.error(data.error)
+                    }
+                    if (data?.success) {
+                        toast.success(data.success)
+                    }
+                })
+                .catch(() => toast.error("Something went wrong"));
+        });
+    };
 
     useEffect(() => {
         if (uploadedImage) {
@@ -42,21 +54,6 @@ export const ImageEditForm = ({
         }
     }, []);
 
-    const onSubmit = async (values: z.infer<typeof UpdateUserSchema>) => {
-        startTransition(() => {
-            updateUserSettings(values)
-                .then((data) => {
-                    if (data?.error) {
-                        toast.error(data.error)
-                    }
-                    if (data?.success) {
-                        toast.success(data.success)
-                    }
-                })
-                .catch(() => toast.error("Something went wrong"));
-        });
-    };
-
     return (
         <div className="mb-4 space-y-4">
             <div className="flex justify-center items-center relative">
@@ -64,7 +61,7 @@ export const ImageEditForm = ({
                     className="w-[90px] h-[90px] rounded-full object-cover"
                 >
                     <AvatarImage
-                        src={uploadedImage || initialImage || "/placeholder.png"}
+                        src={uploadedImage || user?.imageUrl || "/placeholder.png"}
                         alt="Profile Photo"
                     />
                 </Avatar>
@@ -74,9 +71,9 @@ export const ImageEditForm = ({
                             endpoint="profileImage"
                             onChange={(url) => {
                                 if (url) {
-                                    setUploadedImage(url);
                                     setIsEditing(false);
-                                    onSubmit({ image: url });
+                                    setUploadedImage(url); // Update uploadedImage state
+                                    onSubmit({ imageUrl: url });
                                 }
                             }}
                         />
@@ -110,7 +107,7 @@ export const ImageEditForm = ({
                 </div>
             </div>
             <h4 className="text-lg font-bold">
-                {lastName + " " + firstName}
+                {user?.lastName + " " + user?.firstName}
             </h4>
         </div>
     );

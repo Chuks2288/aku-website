@@ -14,9 +14,10 @@ export const UserProfileEdit = ({
         <div className="w-full">
             <div className="flex justify-center">
                 <ImageEditForm
-                    image={user?.image}
-                    firstName={user?.firstName}
-                    lastName={user?.lastName}
+                    // image={user?.imageUrl}
+                    // firstName={user?.firstName}
+                    // lastName={user?.lastName}
+                    user={user as User}
                 />
             </div>
         </div>

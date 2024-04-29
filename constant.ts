@@ -329,3 +329,22 @@ export const profiles = [
         path: "/feedback",
     },
 ]
+
+export const communityWorks = [
+    {
+        title: "Get started",
+        text: "Sign in with just your username.",
+    },
+    {
+        title: "Connect",
+        text: "Connect with other community members.",
+    },
+    {
+        title: "Participation",
+        text: "Read up articles posted and join in the community discussion.",
+    },
+    {
+        title: "Activities",
+        text: "Like, Comment and share news articles.",
+    },
+]

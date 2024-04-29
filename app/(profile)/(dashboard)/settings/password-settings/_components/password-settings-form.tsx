@@ -23,6 +23,7 @@ import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react";
 
 
 export const PasswordSettingsForm = () => {
@@ -31,6 +32,9 @@ export const PasswordSettingsForm = () => {
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
     const [isPending, startTransition] = useTransition();
+    const [showOldPassword, setShowOldPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
 
     const form = useForm<z.infer<typeof UpdatePasswordSchema>>({
         resolver: zodResolver(UpdatePasswordSchema),
@@ -63,7 +67,10 @@ export const PasswordSettingsForm = () => {
     }
 
     return (
-        <div className="flex items-center justify-center h-screen">
+        <div className="flex flex-col items-center justify-center h-screen gap-y-10">
+            <h1 className="font-bold text-blue-600">
+                Change Password
+            </h1>
             <div className="w-full">
                 <Form {...form} >
                     <form
@@ -79,13 +86,23 @@ export const PasswordSettingsForm = () => {
                                     <FormItem>
                                         <FormLabel className="text-blue-600 font-bold text-base">Old Password</FormLabel>
                                         <FormControl>
-                                            <Input
-                                                {...field}
-                                                disabled={isPending}
-                                                className="w-full text-sm focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 bg-gray-100 border-none"
-                                                type="password"
-                                            />
+                                            <div className="relative">
+                                                <Input
+                                                    {...field}
+                                                    disabled={isPending}
+                                                    className="w-full text-sm focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 bg-gray-100 border-none"
+                                                    type={showOldPassword ? "text" : "password"}
+                                                />
+                                                <button
+                                                    type="button"
+                                                    className="absolute inset-y-0 right-0 flex items-center px-3 focus:outline-none"
+                                                    onClick={() => setShowOldPassword(!showOldPassword)}
+                                                >
+                                                    {showOldPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                                </button>
+                                            </div>
                                         </FormControl>
+                                        <FormMessage />
                                     </FormItem>
                                 )}
                             />
@@ -96,13 +113,23 @@ export const PasswordSettingsForm = () => {
                                     <FormItem>
                                         <FormLabel className="text-blue-600 font-bold text-base">New Password</FormLabel>
                                         <FormControl>
-                                            <Input
-                                                {...field}
-                                                disabled={isPending}
-                                                className="w-full text-sm focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 bg-gray-100 border-none"
-                                                type="password"
-                                            />
+                                            <div className="relative">
+                                                <Input
+                                                    {...field}
+                                                    disabled={isPending}
+                                                    className="w-full text-sm focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 bg-gray-100 border-none"
+                                                    type={showNewPassword ? "text" : "password"}
+                                                />
+                                                <button
+                                                    type="button"
+                                                    className="absolute inset-y-0 right-0 flex items-center px-3 focus:outline-none"
+                                                    onClick={() => setShowNewPassword(!showNewPassword)}
+                                                >
+                                                    {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                                </button>
+                                            </div>
                                         </FormControl>
+                                        <FormMessage />
                                     </FormItem>
                                 )}
                             />
@@ -113,13 +140,23 @@ export const PasswordSettingsForm = () => {
                                     <FormItem>
                                         <FormLabel className="text-blue-600 font-bold text-base">Confirm New Password</FormLabel>
                                         <FormControl>
-                                            <Input
-                                                {...field}
-                                                disabled={isPending}
-                                                className="w-full text-sm focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 bg-gray-100 border-none"
-                                                type="password"
-                                            />
+                                            <div className="relative">
+                                                <Input
+                                                    {...field}
+                                                    disabled={isPending}
+                                                    className="w-full text-sm focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 bg-gray-100 border-none"
+                                                    type={showConfirmNewPassword ? "text" : "password"}
+                                                />
+                                                <button
+                                                    type="button"
+                                                    className="absolute inset-y-0 right-0 flex items-center px-3 focus:outline-none"
+                                                    onClick={() => setShowConfirmNewPassword(!showConfirmNewPassword)}
+                                                >
+                                                    {showConfirmNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                                </button>
+                                            </div>
                                         </FormControl>
+                                        <FormMessage />
                                     </FormItem>
                                 )}
                             />

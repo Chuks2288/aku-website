@@ -10,7 +10,7 @@ const SettingsPage = async () => {
     const user = await currentUser();
 
     if (!user) {
-        logout();
+        return await logout();
     }
 
     return (

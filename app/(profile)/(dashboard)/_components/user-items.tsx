@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import "../../globals.css";
+import "../../../globals.css";
 
 import { profiles } from "@/constant";
 import { cn } from "@/lib/utils";

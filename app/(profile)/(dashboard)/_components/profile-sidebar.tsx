@@ -17,7 +17,7 @@ export const ProfileSidebar = ({
         flex-col justify-between">
             <div className="space-y-10">
                 <UserProfile
-                    image={user?.image}
+                    image={user?.imageUrl}
                     firstName={user?.firstName}
                     lastName={user?.lastName}
                     balance={user?.balance}

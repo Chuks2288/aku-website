@@ -17,6 +17,7 @@ export const RegisterSChema = z.object({
     userName: z.string().min(1, {
         message: "Username is required",
     }),
+    imageUrl: z.optional(z.string()),
     email: z.string().email({
         message: "Email is required",
     }),
@@ -81,7 +82,7 @@ export const FormMessageSchema = z.object({
 });
 
 export const UpdateUserSchema = z.object({
-    image: z.optional(z.string().min(1)),
+    // imageUrl: z.optional(z.string().min(1)),
     firstName: z.optional(z.string().min(1)),
     lastName: z.optional(z.string().min(1)),
     userName: z.string().min(1),
