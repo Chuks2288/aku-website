@@ -1,4 +1,4 @@
-import { PasswordSettingsForm } from "./password-settings-form";
+import { PasswordSettingsForm } from "./_components/password-settings-form";
 
 
 

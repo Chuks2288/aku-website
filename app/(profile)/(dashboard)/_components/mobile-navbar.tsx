@@ -31,14 +31,15 @@ export const MobileNavbar = ({
     }, [pathname, onClose]);
 
     return (
-        <div className="block md:hidden mt-2 h-10 bg-green-700">
-            <Button
-                onClick={onOpen}
-                variant="ghost"
-                size="sm"
-            >
-                <Menu className="w-5 h-5" />
-            </Button>
+        <>
+            <div className="block md:hidden mt-2 h-10 bg-green-700">
+                <button
+                    onClick={onOpen}
+                    className="w-10 h-10 flex justify-center items-center"
+                >
+                    <Menu className="w-5 h-5 text-white" />
+                </button>
+            </div>
 
             <Sheet
                 open={isOpen}
@@ -48,7 +49,7 @@ export const MobileNavbar = ({
                     <ProfileSidebar user={user} />
                 </SheetContent>
             </Sheet>
-        </div>
+        </>
     )
 }
 

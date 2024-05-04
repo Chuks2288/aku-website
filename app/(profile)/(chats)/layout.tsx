@@ -20,7 +20,7 @@ const ChatLayout = async ({
                     <main className="">
                         {children}
                     </main>
-                    <Footer />
+                    {/* <Footer /> */}
                 </div>
             </TitleProvider>
         </div>

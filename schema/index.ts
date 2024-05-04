@@ -102,4 +102,10 @@ export const UpdatePasswordSchema = z.object({
     confirmPassword: z.string().min(8, {
         message: "Password is required"
     }),
+});
+
+export const CommunitySchema = z.object({
+    userName: z.string().min(1, {
+        message: "Username is required"
+    }),
 })

@@ -348,3 +348,26 @@ export const communityWorks = [
         text: "Like, Comment and share news articles.",
     },
 ]
+
+export const communities = [
+    {
+        icon: "fluent:people-12-regular",
+        title: "Participants",
+        description: "50 participants",
+    },
+    {
+        icon: "ph:flag-thin",
+        title: "Countries",
+        description: "20 countries",
+    },
+    {
+        icon: "iconamoon:email-thin",
+        title: "Messages",
+        description: "220 Messages",
+    },
+    {
+        icon: "fluent:people-12-regular",
+        title: "Staffs",
+        description: "12 Community staffs",
+    },
+]

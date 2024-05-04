@@ -24,7 +24,6 @@ const ProfileLayout = async ({
                 <div className="max-w-[950px] mx-auto px-4 h-full p-10">
                     {children}
                 </div>
-                <Footer />
             </main>
         </div>
     )

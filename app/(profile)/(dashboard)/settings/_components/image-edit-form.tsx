@@ -14,6 +14,7 @@ import { updateUserSettings } from "@/actions/update-user-settings";
 import { Edit } from "lucide-react";
 import ActionTooltip from "@/components/action-tooltip";
 import { User } from "@prisma/client";
+import { useRouter } from "next/navigation";
 
 type Props = {
     user: User;
@@ -22,6 +23,9 @@ type Props = {
 export const ImageEditForm = ({
     user
 }: Props) => {
+
+    const router = useRouter();
+
     const [isEditing, setIsEditing] = useState(false);
     const [isPending, startTransition] = useTransition();
     const [uploadedImage, setUploadedImage] = useState<string | null>(user?.imageUrl);
@@ -35,6 +39,8 @@ export const ImageEditForm = ({
                     }
                     if (data?.success) {
                         toast.success(data.success)
+                        router.refresh();
+                        window.location.reload();
                     }
                 })
                 .catch(() => toast.error("Something went wrong"));
