@@ -47,3 +47,26 @@ export const getUserById = async (id: string | undefined) => {
 
 
 
+// export const getUsersByReferrerLink = async (referrerLink: string) => {
+//     try {
+//         // Find the referrer with the specified referrerLink
+//         const referrer = await db.referral.findUnique({
+//             where: { referrerLink }
+//         });
+
+//         if (!referrer) {
+//             console.error("Referrer not found for the provided referrerLink:", referrerLink);
+//             return [];
+//         }
+
+//         // Find all users associated with the referrer
+//         const users = await db.user.findMany({
+//             where: { referrerId: referrer.id }
+//         });
+
+//         return users;
+//     } catch (error) {
+//         console.error("Error fetching users by referrer link:", error);
+//         return [];
+//     }
+// };

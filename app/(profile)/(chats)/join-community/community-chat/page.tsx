@@ -1,6 +1,5 @@
-
 import { db } from "@/lib/db"
-import { FormAccess } from "./_components/form-access"
+import { FormAccess } from "./_components/form-access";
 import { currentUser } from "@/lib/auth"
 import { ChatMessages } from "./_components/chat-message";
 import ChatInput from "./_components/chat-input";
@@ -8,16 +7,14 @@ import { ChatHeader } from "./_components/chat-header";
 import { redirect } from "next/navigation";
 import { Member } from "@prisma/client";
 
-
 const CommunityChatPage = async () => {
-
     const user = await currentUser();
 
-    const community = await db.community.findUnique({
-        where: {
-            userId: user?.id
-        }
-    });
+    if (!user) {
+        return redirect("");
+    }
+
+    const community = await db.community.findFirst();
 
     if (!community?.communityMember) {
         return (
@@ -29,23 +26,27 @@ const CommunityChatPage = async () => {
 
     const member = await db.member.findFirst({
         where: {
-            userId: user?.id,
+            communityId: community.id,
+            userId: user.id,
         },
         include: {
             user: true
         }
     });
 
+    if (!member) {
+        return <div>Error: Member not found</div>;
+    }
 
     return (
-        <div>
+        <div className="h-full max-w-[1200px] mx-auto px-3">
             <ChatHeader
-                name={community?.name}
+                name={community.name}
             />
 
             <ChatMessages
                 member={member as Member}
-                name={community?.name}
+                name={community.name}
                 chatId={community.id}
                 actionUrl="/api/messages"
                 socketUrl="/api/socket/messages"
@@ -59,7 +60,7 @@ const CommunityChatPage = async () => {
             <ChatInput
                 actionUrl="/api/socket/messages"
                 type="community"
-                name={member?.user.firstName as string}
+                name={community?.name as string}
                 query={{
                     communityId: community.id,
                 }}
@@ -68,4 +69,4 @@ const CommunityChatPage = async () => {
     )
 }
 
-export default CommunityChatPage
+export default CommunityChatPage;

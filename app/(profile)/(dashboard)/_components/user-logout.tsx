@@ -16,7 +16,7 @@ export const UserLogout = () => {
             variant="ghost"
             className="flex items-center shadow-red-200 border-2 border-red-500
                  text-red-500 gap-x-2 max-w-[110px] p-1 shadow-sm drop-shadow-red rounded-sm">
-            <h6 className="text-base">
+            <h6 className="text-sm">
                 Logout
             </h6>
             <ArrowRight className="w-4 h-4" />

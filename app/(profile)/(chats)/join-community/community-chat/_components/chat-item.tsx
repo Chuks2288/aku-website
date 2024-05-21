@@ -24,7 +24,7 @@ import {
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import ActionTooltip from "@/components/action-tooltip";
 
-import { useDeleteMessageMoal } from "@/hooks/use-message-delete-modal";
+import { useDeleteMessageModal } from "@/hooks/use-message-delete-modal";
 
 interface ChatItemProps {
     id: string;
@@ -72,7 +72,7 @@ const ChatItem = ({
     const [success, setSuccess] = useState<string | undefined>("");
     const [isPending, startTransition] = useTransition();
 
-    const { onOpen } = useDeleteMessageMoal();
+    const { onOpen } = useDeleteMessageModal();
 
 
     const onMemberClick = () => {

@@ -313,6 +313,10 @@ export const profiles = [
         path: "/community",
     },
     {
+        title: "Messages",
+        path: "/messages",
+    },
+    {
         title: "Referrals",
         path: "/referrals",
     },

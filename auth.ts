@@ -14,6 +14,7 @@ declare module "next-auth" {
         firstName?: string | null,
         lastName?: string | null,
         password?: string | null,
+        referrer?: string | any,
         balance: any,
     }
 }
@@ -26,6 +27,7 @@ declare module "@auth/core/adapters" {
         firstName: string | null,
         lastName: string | null,
         password: string | null,
+        referrer: string | any,
         balance: any,
     }
 }
@@ -68,6 +70,7 @@ export const {
                 session.user.lastName = token.lastName as string;
                 session.user.phoneNo = token.phoneNo as string;
                 session.user.password = token.password as string;
+                session.user.referrer = token.referrer as any;
                 session.user.balance = token.balance as any;
             }
 
@@ -78,6 +81,7 @@ export const {
                 session.user.lastName = token.lastName as string;
                 session.user.phoneNo = token.phoneNo as string;
                 session.user.password = token.password as string;
+                session.user.referrer = token.referrer as any;
                 session.user.balance = token.balance as any;
             }
 
@@ -97,11 +101,13 @@ export const {
             token.userName = existingUser.userName;
             token.phoneNo = existingUser.phoneNo;
             token.password = existingUser.password;
+            token.referrer = existingUser.referrer;
             token.balance = existingUser.balance;
 
             return token;
         }
     },
+    // @ts-ignore
     adapter: PrismaAdapter(db),
     session: {
         strategy: "jwt",

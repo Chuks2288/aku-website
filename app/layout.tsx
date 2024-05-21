@@ -7,6 +7,8 @@ import { ModalProvider } from "@/components/providers/modal-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { SocketProvider } from "@/components/providers/socket-provider";
 import QueryProvider from "@/components/providers/query-provider";
+import { auth } from "@/auth";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Syne({ subsets: ["latin"] });
 
@@ -24,29 +26,27 @@ export const metadata: Metadata = {
   ]
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const session = await auth();
+
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Toaster />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="white"
-          enableSystem
-          disableTransitionOnChange
-        >
+    <SessionProvider session={session}>
+      <html lang="en">
+        <body className={inter.className}>
+          <Toaster />
           <SocketProvider>
             <ModalProvider />
             <QueryProvider>
               {children}
             </QueryProvider>
           </SocketProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </SessionProvider>
   );
 }

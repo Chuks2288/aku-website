@@ -12,7 +12,7 @@ export const UserItems = () => {
 
 
     return (
-        <div className="flex flex-col gap-y-7">
+        <div className="flex flex-col gap-y-6">
             {profiles.map(({ title, path }) => {
 
                 const route = pathname === path;

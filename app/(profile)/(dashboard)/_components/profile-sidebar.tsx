@@ -15,7 +15,7 @@ export const ProfileSidebar = ({
     return (
         <div className="fixed left-0 top-0 md:w-72 w-0 h-full shadow-lg p-10 md:flex hidden 
         flex-col justify-between">
-            <div className="space-y-10">
+            <div className="space-y-8">
                 <UserProfile
                     image={user?.imageUrl}
                     firstName={user?.firstName}

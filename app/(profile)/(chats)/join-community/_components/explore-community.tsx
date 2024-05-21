@@ -7,9 +7,12 @@ import { CommunityCard } from "./community-card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { communities } from "@/constant"
+import { useRouter, useSearchParams } from "next/navigation";
 
 
 export const ExploreCommunity = () => {
+    const router = useRouter();
+
     return (
         <div className="h-max py-10">
             <motion.div
@@ -33,13 +36,14 @@ export const ExploreCommunity = () => {
                             ))}
                         </div>
                         <div className="flex justify-center items-center md:pt-20 pt-6">
-                            <Link href="/join-community/community-chat">
+                            <Link href='/join-community/community-chat'>
                                 <Button
                                     size="sm"
                                     className="min-w-[250px] border-none bg-green-500 hover:bg-green-600"
                                 >
                                     Join the record
                                 </Button>
+
                             </Link>
                         </div>
                     </div>

@@ -18,6 +18,7 @@ export const RegisterSChema = z.object({
         message: "Username is required",
     }),
     imageUrl: z.optional(z.string()),
+    referrerLink: z.optional(z.string()),
     email: z.string().email({
         message: "Email is required",
     }),
@@ -108,4 +109,13 @@ export const CommunitySchema = z.object({
     userName: z.string().min(1, {
         message: "Username is required"
     }),
+})
+
+
+export const FeedbackSchema = z.object({
+    excellent: z.optional(z.boolean()),
+    manageable: z.optional(z.boolean()),
+    notWorking: z.optional(z.boolean()),
+    content: z.optional(z.string().min(1)),
+    starRating: z.optional(z.number()),
 })

@@ -7,25 +7,97 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// model User {
+//   id                            String                         @id @default(cuid())
+//   firstName                     String?
+//   lastName                      String?
+//   email                         String?                        @unique
+//   emailVerified                 DateTime?
+//   userName                      String?                        @unique
+//   phoneNo                       String?
+//   imageUrl                      String?
+//   password                      String?
+//   balance                       Decimal?                       @default(0.00)
+//   member                        Member[]
+//   community                     Community?
+//   PasswordTwoFactorConfirmation PasswordTwoFactorConfirmation?
+
+//   communityId String?
+//   referrer    Referrer?  @relation(fields: [referrerId], references: [id])
+//   referrerId  String?
+//   Referral    Referral[]
+// }
+
+// model Referrer {
+//   id            String     @id @default(cuid())
+//   referrerName  String
+//   referrerLink  String     @unique
+//   referredUsers User[]
+//   referral      Referral[]
+// }
+
+// model Referral {
+//   id             String   @id @default(cuid())
+//   referrer       Referrer @relation(fields: [referrerId], references: [id])
+//   referrerId     String
+//   referredUserId String
+//   referredUser   User     @relation(fields: [referredUserId], references: [id])
+// }
 model User {
-  id            String    @id @default(cuid())
-  firstName     String?
-  lastName      String?
-  email         String?   @unique
-  emailVerified DateTime?
-  userName      String?   @unique
-  phoneNo       String?
-  imageUrl      String?
-  password      String?
-  balance       Decimal?  @default(0.00)
-
-  Member Member[]
-
-  Community Community?
-
+  id                            String                         @id @default(cuid())
+  firstName                     String?
+  lastName                      String?
+  email                         String?                        @unique
+  emailVerified                 DateTime?
+  userName                      String?                        @unique
+  phoneNo                       String?
+  imageUrl                      String?
+  password                      String?
+  balance                       Decimal?                       @default(0.00)
+  member                        Member[]
+  community                     Community?
   PasswordTwoFactorConfirmation PasswordTwoFactorConfirmation?
-  communityId                   String?
+
+  communityId String?
+  // referrer    User?   @relation("ReferralRelation", fields: [referrerId], references: [id])
+  // referrerId  String?
+
+  referrerLink ReferrerLink?
+  referrals    Referral[]    @relation("ReferralRelation")
+
+  Referral Referral[]
 }
+
+model ReferrerLink {
+  id     String @id @default(cuid())
+  link   String @unique
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+}
+
+model Referral {
+  id         String @id @default(cuid())
+  referrer   User   @relation("ReferralRelation", fields: [referrerId], references: [id])
+  referrerId String
+  referred   User   @relation(fields: [referredId], references: [id])
+  referredId String
+
+  @@unique([referrerId])
+}
+
+// model Referrer {
+//   id           String     @id @default(cuid())
+//   referrerName String
+//   referrerLink String     @unique
+//   referrals    Referral[] @relation("ReferralToReferrer")
+//   user         User[]
+// }
+
+// model Referral {
+//   id         String   @id @default(cuid())
+//   referrer   Referrer @relation("ReferralToReferrer", fields: [referrerId], references: [id])
+//   referrerId String
+// }
 
 model PasswordTwoFactorToken {
   id      String   @id @default(cuid())

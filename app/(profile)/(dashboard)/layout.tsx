@@ -3,6 +3,7 @@ import { ProfileSidebar } from "./_components/profile-sidebar"
 import { User } from "@prisma/client";
 import { MobileNavbar } from "./_components/mobile-navbar";
 import { Footer } from "@/app/(main)/_components/footer";
+import { logout } from "@/actions/logout";
 
 interface Props {
     children: React.ReactNode

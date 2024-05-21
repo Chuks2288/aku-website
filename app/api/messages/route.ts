@@ -11,6 +11,7 @@ export async function GET(
 ) {
     try {
         const user = await currentUser();
+
         const { searchParams } = new URL(req.url);
 
         const cursor = searchParams.get("cursor");
@@ -72,7 +73,6 @@ export async function GET(
         if (messages.length === MESSAGE_BATCH) {
             nextCursor = messages[MESSAGE_BATCH - 1].id;
         }
-
 
         return NextResponse.json({
             items: messages,

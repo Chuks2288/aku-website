@@ -61,7 +61,7 @@ export const LogoutMoal = () => {
                         className="w-full"
                     >
                         {loading ?
-                            <Loader className="w-5 h-5 animate-spin" />
+                            <Loader2 className="w-5 h-5 animate-spin" />
                             : "Continue"
                         }
                     </Button>

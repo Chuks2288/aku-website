@@ -20,7 +20,7 @@ type MessageWithMemberProfile = Message & {
 }
 
 type Props = {
-    member: any;
+    member: Member;
     name: string;
     chatId: string;
     actionUrl: string;

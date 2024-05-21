@@ -9,6 +9,7 @@ import { Logo } from "@/app/(main)/_components/logo"
 import { CommunityNavbarTitle } from "./community-navbar-title"
 import { CommunityUserProfile } from "./community-user-profile"
 import { Button } from "@/components/ui/button";
+import { SocketIndicator } from "@/components/socket-indicator";
 
 type Props = {
     user: User
@@ -37,13 +38,16 @@ export const CommunityNavbar = ({
                         // @ts-ignore
                         image={user?.imageUrl}
                     />
-                    <Button
+                    {/* <Button
                         variant="primary"
                         size="sm"
                         className="md:flex hidden"
                     >
                         Get Started
-                    </Button>
+                    </Button> */}
+
+                    <SocketIndicator />
+
                 </div>
 
             </div>

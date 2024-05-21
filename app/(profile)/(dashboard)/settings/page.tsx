@@ -6,6 +6,8 @@ import { User } from "@prisma/client";
 import { UserEditForm } from "./_components/user-edit-form";
 import { redirect } from "next/navigation";
 
+
+
 const SettingsPage = async () => {
 
     const user = await currentUser();
