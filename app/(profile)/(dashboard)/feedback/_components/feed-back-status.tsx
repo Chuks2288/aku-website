@@ -6,6 +6,8 @@ import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { feedback } from "@/actions/feedback";
+
 import { FeedbackSchema } from "@/schema";
 
 import {
@@ -17,6 +19,7 @@ import {
 } from "@/components/ui/form"
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 interface Props {
     status: string,
@@ -72,7 +75,20 @@ export const FeedbackStatus = () => {
     };
 
     const onSubmit = (values: z.infer<typeof FeedbackSchema>) => {
-        console.log(values);
+
+        startTransition(() => {
+            feedback(values)
+                .then((data) => {
+                    if (data?.error) {
+                        toast.error(data?.error)
+                    }
+                    if (data?.success) {
+                        // form.reset();
+                        toast.success(data?.success);
+                    }
+                })
+                .catch(() => toast.error("Something went wrong"));
+        })
     }
 
     return (
@@ -82,7 +98,7 @@ export const FeedbackStatus = () => {
                     className="space-y-6"
                     onSubmit={form.handleSubmit(onSubmit)}
                 >
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between gap-x-3">
                         {selectOption.map(({ status, statusType, image }) => (
                             <FormField
                                 key={status}
@@ -93,12 +109,13 @@ export const FeedbackStatus = () => {
                                     <FormItem>
                                         <FormControl>
                                             <div className="flex flex-col gap-y-3">
-                                                <Image
-                                                    src={image}
-                                                    alt={status}
-                                                    width={100}
-                                                    height={100}
-                                                />
+                                                <div className="relative md:w-[100px] w-[60px] md:h-[100px] h-[60px]">
+                                                    <Image
+                                                        src={image}
+                                                        alt={status}
+                                                        fill
+                                                    />
+                                                </div>
                                                 <div className="flex items-center gap-x-2">
                                                     <Checkbox
                                                         disabled={isPending}
@@ -106,7 +123,7 @@ export const FeedbackStatus = () => {
                                                         onCheckedChange={() => handleOptionChange(status)}
                                                         className="border-gray-400"
                                                     />
-                                                    <p className="font-bold">
+                                                    <p className="font-bold md:text-md text-xs">
                                                         {statusType}
                                                     </p>
                                                 </div>

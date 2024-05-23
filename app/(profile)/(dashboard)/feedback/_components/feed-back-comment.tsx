@@ -15,6 +15,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { FeedbackSchema } from "@/schema";
 import { Button } from "@/components/ui/button";
+import { feedback } from "@/actions/feedback";
+import { toast } from "sonner";
 
 export const FeedbackComment = () => {
 
@@ -29,7 +31,20 @@ export const FeedbackComment = () => {
     });
 
     const onSubmit = (values: z.infer<typeof FeedbackSchema>) => {
-        console.log(values);
+
+        startTransition(() => {
+            feedback(values)
+                .then((data) => {
+                    if (data?.error) {
+                        toast.error(data?.error)
+                    }
+                    if (data?.success) {
+                        // form.reset();
+                        toast.success(data?.success);
+                    }
+                })
+                .catch(() => toast.error("Something went wrong"));
+        })
     }
 
     return (
@@ -62,7 +77,7 @@ export const FeedbackComment = () => {
                             size="lg"
                             variant="primary"
                         >
-                            Submit
+                            Send Feedback
                         </Button>
                     </div>
                 </form>

@@ -61,11 +61,15 @@ model User {
   communityId String?
   // referrer    User?   @relation("ReferralRelation", fields: [referrerId], references: [id])
   // referrerId  String?
+  feedback    Feedback?
 
   referrerLink ReferrerLink?
   referrals    Referral[]    @relation("ReferralRelation")
 
   Referral Referral[]
+  // feedbackId String?    @unique
+  Like     Like?
+  Comment  Comment?
 }
 
 model ReferrerLink {
@@ -133,7 +137,7 @@ model FormMessage {
 }
 
 model Community {
-  id              String   @id @default(uuid())
+  id              String   @id @default(cuid())
   name            String
   communityMember Boolean? @default(false)
 
@@ -176,7 +180,7 @@ model Member {
 }
 
 model Message {
-  id      String @id @default(uuid())
+  id      String @id @default(cuid())
   content String @db.Text
 
   memberId String
@@ -194,7 +198,7 @@ model Message {
 }
 
 model Conversation {
-  id String @id @default(uuid())
+  id String @id @default(cuid())
 
   memberOneId String
   memberOne   Member @relation("MemberOne", fields: [memberOneId], references: [id], onDelete: Cascade)
@@ -208,7 +212,7 @@ model Conversation {
 }
 
 model DirectMessage {
-  id      String  @id @default(uuid())
+  id      String  @id @default(cuid())
   content String  @db.Text
   fileUrl String? @db.Text
 
@@ -222,4 +226,41 @@ model DirectMessage {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Feedback {
+  id         String   @id @default(cuid())
+  excellent  Boolean?
+  manageable Boolean?
+  notWorking Boolean?
+  content    String?
+  starRating Int?
+  User       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String?  @unique
+}
+
+model newsFeed {
+  id          String    @id @default(cuid())
+  title       String
+  description String
+  likes       Like[]
+  comments    Comment[]
+}
+
+model Like {
+  id         String    @id @default(cuid())
+  like       Int
+  User       User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String?   @unique
+  newsFeed   newsFeed? @relation(fields: [newsFeedId], references: [id])
+  newsFeedId String?
+}
+
+model Comment {
+  id         String    @id @default(cuid())
+  comment    String
+  User       User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String?   @unique
+  newsFeed   newsFeed? @relation(fields: [newsFeedId], references: [id])
+  newsFeedId String?
 }

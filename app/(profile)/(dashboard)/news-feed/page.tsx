@@ -1,7 +1,11 @@
 
 const NewsFeedPage = () => {
     return (
-        <div>NewsFeedPage</div>
+        <div>
+            <h2 className="text-blue-500 font-bold md:text-xl text-md">
+                News Feed
+            </h2>
+        </div>
     )
 }
 
