@@ -35,7 +35,7 @@ export async function GET(req: Request) {
                 }
             },
             orderBy: {
-                createdAt: "desc"
+                createdAt: 'desc' as const  // Fix: explicitly cast 'desc' as SortOrder
             }
         };
 
@@ -55,14 +55,14 @@ export async function GET(req: Request) {
         if (messages.length === MESSAGE_BATCH) {
             nextCursor = messages[MESSAGE_BATCH - 1].id;
         }
-``
+
         return NextResponse.json({
             items: messages,
             nextCursor
         });
 
     } catch (error) {
-        console.error("MESSAGE_GET Error:", { error, user, url: req.url });
+        console.error("MESSAGE_GET Error:", { error, url: req.url });
         return new NextResponse("Internal Server Error", { status: 500 });
     }
 }
