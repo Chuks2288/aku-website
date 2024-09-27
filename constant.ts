@@ -375,3 +375,11 @@ export const communities = [
         description: "12 Community staffs",
     },
 ]
+
+
+export const newsFeed = [
+    {
+        title: "What you don’t know about Flamingos?",
+        description: "",
+    }
+]

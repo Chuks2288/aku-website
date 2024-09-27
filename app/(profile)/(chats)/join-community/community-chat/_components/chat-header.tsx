@@ -16,7 +16,7 @@ export const ChatHeader = ({
 
     useEffect(() => {
         setTitle(name);
-    }, [])
+    }, [name, setTitle]);
     return null
 }
 

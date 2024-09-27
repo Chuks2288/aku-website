@@ -6,7 +6,7 @@ import { Toaster } from "sonner"
 import { ModalProvider } from "@/components/providers/modal-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { SocketProvider } from "@/components/providers/socket-provider";
-import QueryProvider from "@/components/providers/query-provider";
+import { QueryProvider } from "@/components/providers/query-provider";
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
 

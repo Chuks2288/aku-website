@@ -8,7 +8,6 @@ import { useTitle } from "@/hooks/use-title";
 import { Logo } from "@/app/(main)/_components/logo"
 import { CommunityNavbarTitle } from "./community-navbar-title"
 import { CommunityUserProfile } from "./community-user-profile"
-import { Button } from "@/components/ui/button";
 import { SocketIndicator } from "@/components/socket-indicator";
 
 type Props = {
@@ -23,7 +22,7 @@ export const CommunityNavbar = ({
 
     useEffect(() => {
         setTitle("Community")
-    }, [])
+    }, [setTitle]);
 
     return (
         <div className="h-20 border-b-2">

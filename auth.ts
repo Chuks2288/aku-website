@@ -14,7 +14,7 @@ declare module "next-auth" {
         firstName?: string | null,
         lastName?: string | null,
         password?: string | null,
-        referrer?: string | any,
+        referrer?: any,
         balance: any,
     }
 }
@@ -101,7 +101,7 @@ export const {
             token.userName = existingUser.userName;
             token.phoneNo = existingUser.phoneNo;
             token.password = existingUser.password;
-            token.referrer = existingUser.referrer;
+            // token.referrer = existingUser.referrer;
             token.balance = existingUser.balance;
 
             return token;
